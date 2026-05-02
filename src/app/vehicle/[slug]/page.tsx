@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Briefcase, CalendarClock, CarFront, CheckCircle2, Headphones, MapPinned, ShieldCheck, Star, UsersRound } from "lucide-react";
 import { FareBreakdownView } from "@/components/booking/fare-breakdown";
@@ -32,10 +33,13 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
         <section className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
             <div className="relative min-h-[320px] bg-slate-200">
-              <img
+              <Image
                 src={`${vehicle.image}?auto=format&fit=crop&w=1200&q=85`}
                 alt={vehicle.name}
-                className="h-full min-h-[320px] w-full object-cover"
+                fill
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                priority
+                className="object-cover"
               />
               <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-slate-900 shadow-sm">
                 {categoryLabels[vehicle.category]}

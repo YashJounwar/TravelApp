@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { calculateFare } from "@/lib/pricing/calculateFare";
-import { vehicleData } from "@/lib/data/mock";
+import { vehicleData } from "../data/mock";
+import { calculateFare } from "./calculateFare";
 
 describe("calculateFare", () => {
   it("returns transparent fare components and total", () => {

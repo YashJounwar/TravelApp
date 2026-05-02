@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -112,10 +113,12 @@ function SearchPageContent() {
                 <Card className="overflow-hidden p-0 transition hover:-translate-y-0.5 hover:shadow-lg">
                   <div className="grid md:grid-cols-[220px_1fr_240px]">
                     <div className="relative min-h-48 bg-slate-200 md:min-h-full">
-                      <img
+                      <Image
                         src={`${vehicle.image}?auto=format&fit=crop&w=700&q=80`}
                         alt={vehicle.name}
-                        className="h-full min-h-48 w-full object-cover"
+                        fill
+                        sizes="(min-width: 768px) 220px, 100vw"
+                        className="object-cover"
                       />
                       <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2 py-1 text-xs font-bold text-slate-900 shadow-sm">
                         {categoryLabels[vehicle.category]}
