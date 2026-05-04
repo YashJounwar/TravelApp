@@ -4,16 +4,36 @@ import { CarFront, Headphones, ShieldCheck } from "lucide-react";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { AiChatbot } from "@/components/support/ai-chatbot";
+import { createMetadata, organizationJsonLd, siteConfig, taxiServiceJsonLd } from "@/lib/seo/site";
 
 export const metadata: Metadata = {
-  title: "Shanvi Travels | Reliable India Cab Booking",
-  description: "Book outstation, airport, local rental, and group vehicles across India."
+  metadataBase: new URL(siteConfig.url),
+  ...createMetadata({
+    title: "Shanvi Travels | Outstation Cab Booking, Airport Taxi and Group Travel",
+    description: siteConfig.description
+  }),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1
+    }
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationJsonLd, taxiServiceJsonLd]) }}
+        />
         <ThemeProvider>
           <div className="min-h-screen">
             <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90">
@@ -56,8 +76,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <Headphones className="h-5 w-5 text-blue-700" aria-hidden="true" />
                   <span>Phone and WhatsApp support: +91-90000-00000</span>
                 </div>
+                <div className="md:col-span-3">
+                  <nav className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-slate-500 dark:text-slate-400" aria-label="Popular cab booking links">
+                    <Link href="/seo/delhi-to-jaipur-cab" className="hover:text-blue-700 dark:hover:text-blue-300">Delhi to Jaipur cab</Link>
+                    <Link href="/seo/delhi-to-agra-cab" className="hover:text-blue-700 dark:hover:text-blue-300">Delhi to Agra taxi</Link>
+                    <Link href="/seo/airport-taxi-service" className="hover:text-blue-700 dark:hover:text-blue-300">Airport taxi</Link>
+                    <Link href="/seo/tempo-traveller-booking" className="hover:text-blue-700 dark:hover:text-blue-300">Tempo traveller</Link>
+                    <Link href="/policies" className="hover:text-blue-700 dark:hover:text-blue-300">Policies</Link>
+                  </nav>
+                </div>
               </div>
             </footer>
+            <AiChatbot />
           </div>
         </ThemeProvider>
       </body>

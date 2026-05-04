@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +10,20 @@ import { Card } from "@/components/ui/card";
 import { MotionReveal } from "@/components/ui/motion-reveal";
 import { vehicleData, categoryLabels } from "@/lib/data/mock";
 import { calculateFare } from "@/lib/pricing/calculateFare";
+import { createMetadata } from "@/lib/seo/site";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const vehicle = vehicleData.find((v) => v.slug === slug);
+  if (!vehicle) return {};
+
+  return createMetadata({
+    title: `${vehicle.name} Cab Booking | ${categoryLabels[vehicle.category]} with Verified Driver`,
+    description: `Book ${vehicle.name} with ${vehicle.seats} seats, ${vehicle.luggage} bag capacity, verified driver checks, transparent fare estimate, and Shanvi Travels support.`,
+    path: `/vehicle/${vehicle.slug}`,
+    keywords: [`${vehicle.name} cab booking`, categoryLabels[vehicle.category], "verified driver cab"]
+  });
+}
 
 export default async function VehicleDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

@@ -5,6 +5,7 @@ import { TrustSignals } from "@/components/trust/trust-signals";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MotionReveal } from "@/components/ui/motion-reveal";
+import { seoLandingPages } from "@/lib/seo/landing-pages";
 
 export default function HomePage() {
   const routes = [
@@ -145,6 +146,32 @@ export default function HomePage() {
             <Star className="h-5 w-5 text-amber-300" aria-hidden="true" />
             <p className="text-sm font-semibold">Transparent pricing, verified operators, and clear support are visible before users commit.</p>
             <CheckCircle2 className="h-5 w-5 text-emerald-400" aria-hidden="true" />
+          </div>
+        </section>
+      </MotionReveal>
+
+      <MotionReveal delay={0.28}>
+        <section className="mx-auto max-w-6xl px-4">
+          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wide text-blue-700 dark:text-blue-400">Plan faster next time</p>
+              <h2 className="text-2xl font-bold text-slate-950 dark:text-white">High-demand cab routes and services</h2>
+            </div>
+            <p className="max-w-xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+              Route pages keep the fare estimate, policy notes, and booking checklist close together so repeat customers can compare and book with fewer steps.
+            </p>
+          </div>
+          <div className="grid gap-3 md:grid-cols-5">
+            {seoLandingPages.map((page) => (
+              <Link
+                key={page.slug}
+                href={`/seo/${page.slug}`}
+                className="rounded-md border border-slate-200 bg-white p-3 text-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-blue-900"
+              >
+                <p className="font-bold text-slate-950 dark:text-white">{page.h1}</p>
+                <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-300">{page.primaryKeyword}</p>
+              </Link>
+            ))}
           </div>
         </section>
       </MotionReveal>

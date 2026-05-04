@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run --pool=threads"
+    "test": "vitest run --pool=threads",
+    "auth:hash": "node scripts/hash-admin-password.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
